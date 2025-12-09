@@ -1,15 +1,24 @@
 {
     "small": {
+        "used_cpu": 0,
+        "used_ram": 0,
+        "used_disk": 0,
         "max_cpu": 8,
         "max_ram": 32,
         "max_disk": 16
     },
     "medium": {
+        "used_cpu": 0,
+        "used_ram": 0,
+        "used_disk": 0,
         "max_cpu": 16,
         "max_ram": 256,
         "max_disk": 64
     },
     "big": {
+        "used_cpu": 0,
+        "used_ram": 0,
+        "used_disk": 0,
         "max_cpu": 64,
         "max_ram": 512,
         "max_disk": 128
