@@ -2,8 +2,9 @@
 
 class Server
 {
-  public static array $servers;
+  public static array $server_data;
   public int $id;
+  public array $vms;
 
   public int $used_cpu = 0;
   public int $used_ram = 0;
@@ -15,6 +16,7 @@ class Server
 
   function __construct(
     int $id,
+    array $vms,
     int $max_cpu,
     int $used_cpu,
     int $max_ram,
@@ -23,6 +25,7 @@ class Server
     int $used_disk,
   ) {
     $this->id = $id;
+    $this->vms = $vms;
     $this->max_cpu = $max_cpu;
     $this->used_cpu = $used_cpu;
     $this->max_ram = $max_ram;
@@ -31,28 +34,34 @@ class Server
     $this->used_disk = $used_disk;
   }
 
-  static function select_server(int $cpu, int $ram, int $disk): int | null
+  static function select_server(String $vm_name, int $cpu, int $ram, int $disk): int | null
   {
-    foreach (Server::$servers as $server) {
-      if (($server->max_cpu - $server->used_cpu) >= $cpu &&
-        ($server->max_ram - $server->used_ram) >= $ram &&
-        ($server->max_disk - $server->used_disk) >= $disk
+    foreach (Server::$server_data as $server) {
+      if (
+        !in_array($vm_name, $server->vms) &&
+        ($server->max_cpu - $server->used_cpu >= $cpu) &&
+        ($server->max_ram - $server->used_ram >= $ram) &&
+        ($server->max_disk - $server->used_disk >= $disk)
       ) {
         $server->used_cpu = $cpu;
         $server->used_ram = $ram;
         $server->used_disk = $disk;
+        array_push($server->vms, $vm_name);
         return $server->id;
       }
     }
     return null;
   }
-}
 
-function main()
-{
-  require "backend/init.php";
-  print_r(Server::select_server(9, 2, 3));
-  file_put_contents("backend/data.json", json_encode(Server::$servers, JSON_PRETTY_PRINT));
+  static function delete_server(String $vm_name_delete): bool
+  {
+    foreach (Server::$server_data as $server) {
+      $index = array_search($vm_name_delete, $server->vms);
+      if ($index !== false) {
+        unset($server->vms[$index]);
+        return true;
+      }
+    }
+    return false;
+  }
 }
-
-main();

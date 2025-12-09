@@ -283,41 +283,41 @@
             <div class="card">
                 <h2>Virtuelle Maschine mieten</h2>
                 
-                <form method="post">
+                <form method="post" action="../backend/validation.php">
                     <label for="vm_name">Name der VM</label>
                     <input type="text" id="vm_name" name="vm_name" placeholder="z.B webserver-01" required>
 
-                    <label for="cpu">CPU (Cores)</label>
+                    <label for="cpu">Anzahl Prozessoren (Cores)</label>
                     <select name="cpu" id="cpu" required>
                         <option value="">Bitte wählen</option>
                         <!-- do kann meh au eh foreach loop mache -->
-                        <option value="1">1 Cores (5CHF / Monat)</option>
-                        <option value="1">2 Cores (5CHF / Monat)</option>
-                        <option value="1">4 Cores (5CHF / Monat)</option>
-                        <option value="1">8 Cores (5CHF / Monat)</option>
-                        <option value="1">16 Cores (5CHF / Monat)</option>
+                        <option value="1" >1 Cores </option>
+                        <option value="2" >2 Cores </option>
+                        <option value="4" >4 Cores </option>
+                        <option value="8" >8 Cores </option>
+                        <option value="16">16 Cores</option>
                     </select>
 
-                    <label for="cpu">CPU (Cores)</label>
-                    <select name="cpu" id="cpu" required>
+                    <label for="ram">Anzahl Arbeitsspeicher</label>
+                    <select name="ram" id="ram" required>
                         <option value="">Bitte wählen</option>
                         <!-- do kann meh au eh foreach loop mache -->
-                        <option value="1">1 Cores (5CHF / Monat)</option>
-                        <option value="1">2 Cores (5CHF / Monat)</option>
-                        <option value="1">4 Cores (5CHF / Monat)</option>
-                        <option value="1">8 Cores (5CHF / Monat)</option>
-                        <option value="1">16 Cores (5CHF / Monat)</option>
+                        <option value="8"  >8 GB Arbeitsspeicher</option>
+                        <option value="16" >16 GB Arbeitsspeicher</option>
+                        <option value="32" >32 GB Arbeitsspeicher</option>
+                        <option value="64" >64 GB Arbeitsspeicher</option>
+                        <option value="128">128 GB Arbeitsspeicher</option>
                     </select>
 
-                    <label for="cpu">CPU (Cores)</label>
-                    <select name="cpu" id="cpu" required>
+                    <label for="disk">Anzahl Speicherplatz</label>
+                    <select name="disk" id="disk" required>
                         <option value="">Bitte wählen</option>
                         <!-- do kann meh au eh foreach loop mache -->
-                        <option value="1">1 Cores (5CHF / Monat)</option>
-                        <option value="1">2 Cores (5CHF / Monat)</option>
-                        <option value="1">4 Cores (5CHF / Monat)</option>
-                        <option value="1">8 Cores (5CHF / Monat)</option>
-                        <option value="1">16 Cores (5CHF / Monat)</option>
+                        <option value="2" >2 TB Speicher</option>
+                        <option value="4" >4 TB Speicher</option>
+                        <option value="8" >8 TB Speicher</option>
+                        <option value="16">16 TB Speicher</option>
+                        <option value="32">32 TB Speicher</option>
                     </select>
 
                     <button type="submit">VM erstellen</button>

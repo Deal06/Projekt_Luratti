@@ -1,13 +1,15 @@
 <?php
-$json = json_decode(file_get_contents("backend/data.json"));
+require "../backend/main.php";
+$json = json_decode(file_get_contents("../backend/data.json"));
 
 $small_data = $json->small;
 $medium_data = $json->medium;
 $big_data = $json->big;
 
-Server::$servers = [
+Server::$server_data = [
   "small" => new Server(
     $small_data->id,
+    $small_data->vms,
     $small_data->max_cpu,
     $small_data->used_cpu,
     $small_data->max_ram,
@@ -17,6 +19,7 @@ Server::$servers = [
   ),
   "medium" => new Server(
     $medium_data->id,
+    $medium_data->vms,
     $medium_data->max_cpu,
     $medium_data->used_cpu,
     $medium_data->max_ram,
@@ -26,6 +29,7 @@ Server::$servers = [
   ),
   "big" => new Server(
     $big_data->id,
+    $big_data->vms,
     $big_data->max_cpu,
     $big_data->used_cpu,
     $big_data->max_ram,

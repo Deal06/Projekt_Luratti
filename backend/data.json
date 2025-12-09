@@ -1,6 +1,7 @@
 {
     "small": {
         "id": 0,
+        "vms": [],
         "used_cpu": 0,
         "used_ram": 0,
         "used_disk": 0,
@@ -10,6 +11,7 @@
     },
     "medium": {
         "id": 1,
+        "vms": [],
         "used_cpu": 0,
         "used_ram": 0,
         "used_disk": 0,
@@ -19,6 +21,7 @@
     },
     "big": {
         "id": 2,
+        "vms": [],
         "used_cpu": 0,
         "used_ram": 0,
         "used_disk": 0,
