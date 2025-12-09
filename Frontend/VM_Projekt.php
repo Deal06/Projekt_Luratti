@@ -327,7 +327,7 @@
             <!-- VM lösche -->
             <div class="card">
                 <h2>Virtuelle Maschine löschen</h2>
-                <form method="post">
+                <form method="post" action="../backend/validation.php">
                     <label for="vm_name_delete">Name der VM</label>
                     <input type="text" id="vm_name_delete" name="vm_name_delete" placeholder="z.B webserver-01" required>
 

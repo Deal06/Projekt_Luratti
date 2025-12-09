@@ -46,7 +46,7 @@ class Server
         $server->used_cpu = $cpu;
         $server->used_ram = $ram;
         $server->used_disk = $disk;
-        array_push($server->vms, $vm_name);
+        $server->vms["$vm_name"] = ["vm_used_cpu" => $cpu, "vm_used_ram" => $ram, "vm_used_disk" => $disk];
         return $server->id;
       }
     }
@@ -56,9 +56,14 @@ class Server
   static function delete_server(String $vm_name_delete): bool
   {
     foreach (Server::$server_data as $server) {
-      $index = array_search($vm_name_delete, $server->vms);
-      if ($index !== false) {
-        unset($server->vms[$index]);
+
+      if (array_key_exists($vm_name_delete, $server->vms)) {
+        $vm_array = (array) $server->vms["$vm_name_delete"];
+
+        $server->used_cpu  -= $vm_array["vm_used_cpu"];
+        $server->used_ram  -= $vm_array["vm_used_ram"];
+        $server->used_disk -= $vm_array["vm_used_disk"];
+        unset($server->vms[$vm_name_delete]);
         return true;
       }
     }

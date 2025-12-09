@@ -9,7 +9,7 @@ $big_data = $json->big;
 Server::$server_data = [
   "small" => new Server(
     $small_data->id,
-    $small_data->vms,
+    (array) $small_data->vms,
     $small_data->max_cpu,
     $small_data->used_cpu,
     $small_data->max_ram,
@@ -19,7 +19,7 @@ Server::$server_data = [
   ),
   "medium" => new Server(
     $medium_data->id,
-    $medium_data->vms,
+    (array) $medium_data->vms,
     $medium_data->max_cpu,
     $medium_data->used_cpu,
     $medium_data->max_ram,
@@ -29,7 +29,7 @@ Server::$server_data = [
   ),
   "big" => new Server(
     $big_data->id,
-    $big_data->vms,
+    (array) $big_data->vms,
     $big_data->max_cpu,
     $big_data->used_cpu,
     $big_data->max_ram,
