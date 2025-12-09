@@ -5,8 +5,9 @@ $small_data = $json->small;
 $medium_data = $json->medium;
 $big_data = $json->big;
 
-$servers = [
+Server::$servers = [
   "small" => new Server(
+    $small_data->id,
     $small_data->max_cpu,
     $small_data->used_cpu,
     $small_data->max_ram,
@@ -15,6 +16,7 @@ $servers = [
     $small_data->used_disk,
   ),
   "medium" => new Server(
+    $medium_data->id,
     $medium_data->max_cpu,
     $medium_data->used_cpu,
     $medium_data->max_ram,
@@ -23,6 +25,7 @@ $servers = [
     $medium_data->used_disk,
   ),
   "big" => new Server(
+    $big_data->id,
     $big_data->max_cpu,
     $big_data->used_cpu,
     $big_data->max_ram,
