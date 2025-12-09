@@ -5,7 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UberCloud</title>
 <style>
-    h1 { text-align: center; }
+    body {
+        font-family: system-ui, sans-serif;
+        background: white;  /*#0f172a;*/
+        color: #e5e7eb;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        padding: 20px 40px;
+        background: rgba(15, 23, 42, 0.9);
+        border-color: 1px solid #1f2937;
+    }
+    
+    h1 { 
+        margin: 0;
+        font-size: 1.8rem;
+    }
 
     .small, .medium, .big {
         border: 2px solid black;
@@ -123,9 +140,24 @@
     }
 </style>
 </head>
-<body>
 
-<h1>Willkommen zur UberCloud</h1>
+
+<body>
+    <header>
+        <h1>UberCloud - Demo (Modul 346)</h1>
+    </header>
+
+    <main>
+        <div>
+            <div>
+                <p>Laufende VMs:</p>
+            </div>
+
+            <div>
+                <p>Monatlicher Gesamtumsatz:</p>
+            </div>
+        </div>
+    </main>
 
 <div class="server">
     <!-- SMALL -->
