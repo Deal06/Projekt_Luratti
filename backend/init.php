@@ -14,8 +14,8 @@ Server::$server_data = [
     $small_data->used_cpu,
     $small_data->max_ram,
     $small_data->used_ram,
-    $small_data->max_disk,
-    $small_data->used_disk,
+    $small_data->max_ssd,
+    $small_data->used_ssd,
   ),
   "medium" => new Server(
     $medium_data->id,
@@ -24,8 +24,8 @@ Server::$server_data = [
     $medium_data->used_cpu,
     $medium_data->max_ram,
     $medium_data->used_ram,
-    $medium_data->max_disk,
-    $medium_data->used_disk,
+    $medium_data->max_ssd,
+    $medium_data->used_ssd,
   ),
   "big" => new Server(
     $big_data->id,
@@ -34,7 +34,7 @@ Server::$server_data = [
     $big_data->used_cpu,
     $big_data->max_ram,
     $big_data->used_ram,
-    $big_data->max_disk,
-    $big_data->used_disk,
+    $big_data->max_ssd,
+    $big_data->used_ssd,
   ),
 ];
