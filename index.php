@@ -4,241 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="frontend/styles.css">
   <title>UberCloud</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      padding: 20px 40px;
-      background: rgba(15, 23, 42, 0.9);
-      border-color: 1px solid #1f2937;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 20px auto 60px auto;
-      padding: 0 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 2fr 1.5fr;
-      gap: 20px;
-      margin-bottom: 30px
-    }
-
-    .card {
-      background: rgba(15, 23, 42, 0.9);
-      padding: 18px 20px;
-      border-radius: 14px;
-      border: 1px solid #1f2937;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-    }
-
-    label {
-      display: block;
-      margin: 8px 0 4px 0;
-      font-size: 0.9rem;
-    }
-
-    input[type="text"],
-    select {
-      width: 95%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #374151;
-      background: #020617;
-      font-size: 0.9 rem;
-    }
-
-    .small,
-    .medium,
-    .big {
-      border: 2px solid black;
-      border-radius: 10px;
-      width: 300px;
-      height: 500px;
-      transition: all 0.5s ease;
-    }
-
-    .small:hover,
-    .medium:hover,
-    .big:hover {
-      box-shadow: 10px 10px 10px lightblue;
-      transform: scale(1.025);
-    }
-
-    .smallText,
-    .mediumText,
-    .bigText {
-      text-align: center;
-    }
-
-    .server {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      margin-top: 50px;
-      margin-bottom: 50px;
-    }
-
-    /* -------------------
-       Balkendiagramme
-       ------------------- */
-    .diagrammSmall,
-    .diagrammMedium,
-    .diagrammBig {
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-end;
-      height: 150px;
-      width: 150px;
-      margin-left: 75px;
-      margin-top: 120px;
-    }
-
-    .bar {
-      width: 30px;
-      border-radius: 5px 5px 0 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      color: white;
-      font-weight: bold;
-      font-size: 12px;
-    }
-
-    .bar.cpu {
-      background-color: darkblue;
-      color: white;
-    }
-
-    .bar.ram {
-      background-color: blue;
-      color: white;
-    }
-
-    .bar.ssd {
-      background-color: turquoise;
-      color: white;
-    }
-
-    .diagrammText {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      margin-top: 10px;
-    }
-
-    .cpu {
-      color: darkblue;
-    }
-
-    .ram {
-      color: blue;
-    }
-
-    .ssd {
-      color: turquoise;
-    }
-
-    .formular {
-      margin-top: 30px;
-      border: 2px solid black;
-      border-radius: 10px;
-      width: 1095px;
-      height: 300px;
-      margin-left: 55px;
-      padding: 30px;
-      transition: all 0.5s ease;
-    }
-
-    .formular:hover {
-      box-shadow: 5px 5px 5px lightblue;
-      transform: scale(0.2)
-    }
-
-    .input {
-      width: 1070px;
-      height: 50px;
-      font-size: 20px;
-    }
-
-    .text {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-
-    button {
-      margin-top: 12px;
-      padding: 9px 16px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: #22c55e;
-      color: #022c22;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    button.delete {
-      margin-top: 12px;
-      padding: 9px 16px;
-      border-radius: 999px;
-      background: #ef4444;
-      color: #450a0a;
-      border: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-
-    }
-
-    .preis {
-      margin-top: 30px;
-      border: 2px solid black;
-      border-radius: 10px;
-      transition: all 0.5s ease;
-      margin-left: 55px;
-      width: 1150px;
-      height: 100px;
-    }
-
-    .summary {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .summary-item {
-      font-size: 0.9rem;
-    }
-
-    footer {
-      text-align: center;
-      color: #6b7280;
-      font-size: 0.8rem;
-      padding-bottom: 20px;
-    }
-  </style>
 </head>
 
 
@@ -258,9 +25,9 @@
       </div>
     </div>
 
-    <?php
+    <?php // Validation
+    require "backend/init.php";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      require "../backend/init.php";
 
       if (
         !empty($_POST["vm_name"]) && 30 >= strlen($_POST["vm_name"]) &&
@@ -274,32 +41,33 @@
         $ssd = htmlspecialchars($_POST["ssd"]);
 
         Server::select_server($vm_name, $cpu, $ram, $ssd);
-        file_put_contents("../backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
+        file_put_contents("backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
       } else if (!empty($_POST["vm_name_delete"])) {
         Server::delete_server($_POST["vm_name_delete"]);
-        file_put_contents("../backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
-      }
-
-      foreach (Server::$server_data as $server) {
-        if ($server->id == 0) $s_bar = array(
-          "cpu" => $server->used_cpu,
-          "ram" => $server->used_ram,
-          "ssd" => $server->used_ssd
-        );
-        if ($server->id == 1) $m_bar = array(
-          "cpu" => $server->used_cpu,
-          "ram" => $server->used_ram,
-          "ssd" => $server->used_ssd
-        );
-        if ($server->id == 2) $b_bar = array(
-          "cpu" => $server->used_cpu,
-          "ram" => $server->used_ram,
-          "ssd" => $server->used_ssd
-        );
+        file_put_contents("backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
       }
     }
     ?>
 
+    <?php // Getting the usage values for bar statistics below
+    foreach (Server::$server_data as $server) {
+      if ($server->id == 0) $s_bar = array(
+        "cpu" => $server->used_cpu / $server->max_cpu * 100,
+        "ram" => $server->used_ram / $server->max_ram * 100,
+        "ssd" => $server->used_ssd / $server->max_ssd * 100
+      );
+      if ($server->id == 1) $m_bar = array(
+        "cpu" => $server->used_cpu / $server->max_cpu * 100,
+        "ram" => $server->used_ram / $server->max_ram * 100,
+        "ssd" => $server->used_ssd / $server->max_ssd * 100
+      );
+      if ($server->id == 2) $b_bar = array(
+        "cpu" => $server->used_cpu / $server->max_cpu * 100,
+        "ram" => $server->used_ram / $server->max_ram * 100,
+        "ssd" => $server->used_ssd / $server->max_ssd * 100
+      );
+    }
+    ?>
     <div class="server">
       <!-- SMALL -->
       <div class="small">
@@ -355,7 +123,7 @@
 
         <form method="post" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
           <label for="vm_name">Name der VM</label>
-          <input type="text" id="vm_name" name="vm_name" placeholder="z.B webserver-01" required>
+          <input type="text" id="vm_name" name="vm_name" placeholder="z.B webserver-01 (max 30 zeichen)" required>
 
           <label for="cpu">Anzahl Prozessoren (Cores)</label>
           <select name="cpu" id="cpu" required>
@@ -412,21 +180,15 @@
       <!-- Liste der VMs -->
       <div class="card">
         <h2>Laufende virtuelle Maschinen</h2>
-        <p>keine vms</p>
-
-        <table>
-          <thead>
-            <tr>
-              <?php
-              foreach (Server::$server_data as $server) {
-                foreach ($server->vms as $vmname => $values) {
-                  echo ($vmname);
-                }
-              }
-              ?>
-            </tr>
-          </thead>
-        </table>
+        <ul>
+          <?php
+          foreach (Server::$server_data as $server) {
+            foreach ($server->vms as $vmname => $values) {
+              echo "<li>$vmname</li>";
+            }
+          }
+          ?>
+        </ul>
       </div>
 
       <!-- Preis -->

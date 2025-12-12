@@ -1,6 +1,6 @@
 <?php
-require "../backend/main.php";
-$json = json_decode(file_get_contents("../backend/data.json"));
+require "backend/main.php";
+$json = json_decode(file_get_contents("backend/data.json"));
 
 $small_data = $json->small;
 $medium_data = $json->medium;
