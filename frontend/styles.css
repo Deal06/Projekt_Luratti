@@ -212,18 +212,6 @@ Balkendiagramme
     height: 100px;
   }
 
-  .summary {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .summary-item {
-    font-size: 0.9rem;
-  }
-
   footer {
     text-align: center;
     color: #6b7280;

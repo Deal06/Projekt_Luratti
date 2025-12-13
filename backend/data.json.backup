@@ -2,6 +2,7 @@
     "small": {
         "id": 0,
         "vms": [],
+        "revenue": 0,
         "used_cpu": 0,
         "used_ram": 0,
         "used_ssd": 0,
@@ -12,6 +13,7 @@
     "medium": {
         "id": 1,
         "vms": [],
+        "revenue": 0,
         "used_cpu": 0,
         "used_ram": 0,
         "used_ssd": 0,
@@ -22,6 +24,7 @@
     "big": {
         "id": 2,
         "vms": [],
+        "revenue": 0,
         "used_cpu": 0,
         "used_ram": 0,
         "used_ssd": 0,

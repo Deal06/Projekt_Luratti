@@ -15,18 +15,8 @@
   </header>
 
   <main>
-    <div class="summary">
-      <div class="summary-item">
-        <p>Laufende VMs:</p>
-      </div>
-
-      <div class="summary-item">
-        <p>Monatlicher Gesamtumsatz:</p>
-      </div>
-    </div>
-
     <?php // Validation
-    require "backend/init.php";
+    require __DIR__ . "/backend/init.php";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if (
@@ -41,31 +31,37 @@
         $ssd = htmlspecialchars($_POST["ssd"]);
 
         Server::select_server($vm_name, $cpu, $ram, $ssd);
-        file_put_contents("backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
+        file_put_contents(__DIR__ . "/backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
       } else if (!empty($_POST["vm_name_delete"])) {
         Server::delete_server($_POST["vm_name_delete"]);
-        file_put_contents("backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
+        file_put_contents(__DIR__ . "/backend/data.json", json_encode(Server::$server_data, JSON_PRETTY_PRINT));
       }
     }
-    ?>
 
-    <?php // Getting the usage values for bar statistics below
     foreach (Server::$server_data as $server) {
-      if ($server->id == 0) $s_bar = array(
-        "cpu" => $server->used_cpu / $server->max_cpu * 100,
-        "ram" => $server->used_ram / $server->max_ram * 100,
-        "ssd" => $server->used_ssd / $server->max_ssd * 100
-      );
-      if ($server->id == 1) $m_bar = array(
-        "cpu" => $server->used_cpu / $server->max_cpu * 100,
-        "ram" => $server->used_ram / $server->max_ram * 100,
-        "ssd" => $server->used_ssd / $server->max_ssd * 100
-      );
-      if ($server->id == 2) $b_bar = array(
-        "cpu" => $server->used_cpu / $server->max_cpu * 100,
-        "ram" => $server->used_ram / $server->max_ram * 100,
-        "ssd" => $server->used_ssd / $server->max_ssd * 100
-      );
+      if ($server->id == 0) {
+        $s_bar = array(
+          "cpu" => ($server->max_cpu != 0) ? round(($server->used_cpu / $server->max_cpu) * 100, 2) : 0,
+          "ram" => ($server->max_ram != 0) ? round(($server->used_ram / $server->max_ram) * 100, 2) : 0,
+          "ssd" => ($server->max_ssd != 0) ? round(($server->used_ssd / $server->max_ssd) * 100, 2) : 0
+        );
+      }
+
+      if ($server->id == 1) {
+        $m_bar = array(
+          "cpu" => ($server->max_cpu != 0) ? round(($server->used_cpu / $server->max_cpu) * 100, 2) : 0,
+          "ram" => ($server->max_ram != 0) ? round(($server->used_ram / $server->max_ram) * 100, 2) : 0,
+          "ssd" => ($server->max_ssd != 0) ? round(($server->used_ssd / $server->max_ssd) * 100, 2) : 0
+        );
+      }
+
+      if ($server->id == 2) {
+        $b_bar = array(
+          "cpu" => ($server->max_cpu != 0) ? round(($server->used_cpu / $server->max_cpu) * 100, 2) : 0,
+          "ram" => ($server->max_ram != 0) ? round(($server->used_ram / $server->max_ram) * 100, 2) : 0,
+          "ssd" => ($server->max_ssd != 0) ? round(($server->used_ssd / $server->max_ssd) * 100, 2) : 0
+        );
+      }
     }
     ?>
     <div class="server">
@@ -194,6 +190,13 @@
       <!-- Preis -->
       <div class="card">
         <h2>Preis</h2>
+        <?php
+        $total = 0;
+        foreach (Server::$server_data as $server) {
+          $total += $server->revenue;
+        }
+        echo $total;
+        ?>
       </div>
 
     </div>
