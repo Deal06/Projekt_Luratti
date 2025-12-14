@@ -124,7 +124,6 @@
           <label for="cpu">Anzahl Prozessoren (Cores)</label>
           <select name="cpu" id="cpu" required>
             <option value="">Bitte wählen</option>
-            <!-- do kann meh au eh foreach loop mache -->
             <option value="1">1 Cores </option>
             <option value="2">2 Cores </option>
             <option value="4">4 Cores </option>
@@ -135,7 +134,6 @@
           <label for="ram">Anzahl Arbeitsspeicher</label>
           <select name="ram" id="ram" required>
             <option value="">Bitte wählen</option>
-            <!-- do kann meh au eh foreach loop mache -->
             <option value="8">8 GB Arbeitsspeicher</option>
             <option value="16">16 GB Arbeitsspeicher</option>
             <option value="32">32 GB Arbeitsspeicher</option>
@@ -146,7 +144,6 @@
           <label for="ssd">Anzahl Speicherplatz</label>
           <select name="ssd" id="ssd" required>
             <option value="">Bitte wählen</option>
-            <!-- do kann meh au eh foreach loop mache -->
             <option value="2">2 TB Speicher</option>
             <option value="4">4 TB Speicher</option>
             <option value="8">8 TB Speicher</option>
@@ -159,16 +156,16 @@
       </div>
 
       <!-- VM lösche -->
-      <div class="card">
+      <div class="card" id="delete_card">
         <h2>Virtuelle Maschine löschen</h2>
         <form method="post" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
           <label for="vm_name_delete">Name der VM</label>
           <input type="text" id="vm_name_delete" name="vm_name_delete" placeholder="z.B webserver-01" required>
 
-          <button type="submit" class="delete">WM löschen</button>
+          <button type="submit" class="delete">VM löschen</button>
 
           <p>
-            Hinweis: die vm wird gelöscht!!!!!!!!1!!1!
+            Hinweis: die vm wird gelöscht!
           </p>
         </form>
       </div>
@@ -189,7 +186,7 @@
 
       <!-- Preis -->
       <div class="card">
-        <h2>Preis</h2>
+        <h2>Gesammtumsatz pro Monat:</h2>
         <?php
         $total = 0;
         foreach (Server::$server_data as $server) {
@@ -204,6 +201,11 @@
 
   <footer>
     UberCloud
+    Erstellt von:
+    Luka Ilikj
+    Lukas Thommen
+    Dani el array_interse
+    Basel günterstrasse 5034
   </footer>
 
 
