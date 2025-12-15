@@ -36,9 +36,21 @@ class Server
     $this->used_ssd = $used_ssd;
   }
 
-  function get_vm_names(): array | String | null
+  function get_load(): int
   {
-    return array_keys($this->vms);
+    //return ($this->used_cpu + $this->used_ram + $this->used_ssd) / ($this->max_cpu + $this->max_ram + $this->max_ssd) * 100;
+    return $this->used_cpu + $this->used_ram + $this->used_ssd;
+  }
+
+  static function get_all_vm_names(): array | null
+  {
+    $all_vm_names = [];
+    foreach (Server::$server_data as $server) {
+      foreach (array_keys($server->vms) as $vmname) {
+        array_push($all_vm_names, $vmname);
+      }
+    }
+    return $all_vm_names;
   }
 
   function get_vm_price(int $cpu, int $ram, int $ssd): int
@@ -73,19 +85,32 @@ class Server
     return $total;
   }
 
-  static function select_server(string $vm_name, int $cpu, int $ram, int $ssd): int | null
+  static function get_server_by_id(int $id): Server | null
   {
-    $all_vm_names = [];
     foreach (Server::$server_data as $server) {
-      foreach ($server->get_vm_names() as $vmname) {
-        array_push($all_vm_names, $vmname);
-        error_log($vmname);
+      if ($server->id == $id) {
+        return $server;
       }
     }
+    return null;
+  }
+
+  static function select_server(string $vm_name, int $cpu, int $ram, int $ssd): int | null
+  {
+    $all_vm_names = Server::get_all_vm_names();
     if (in_array($vm_name, $all_vm_names)) {
       return null;
     }
+
+    $load = [];
     foreach (Server::$server_data as $server) {
+      $load[$server->id] = $server->get_load();
+    }
+
+    asort($load);
+
+    foreach ($load as $server_id => $load) {
+      $server = Server::get_server_by_id($server_id);
       if (
         ($server->max_cpu - $server->used_cpu >= $cpu) &&
         ($server->max_ram - $server->used_ram >= $ram) &&

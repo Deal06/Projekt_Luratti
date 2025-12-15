@@ -74,9 +74,9 @@
           <div class="bar ssd" style="height:<?= $s_bar['ssd'] ?>%;"><?= $s_bar['ssd'] ?>%</div>
         </div>
         <div class="diagrammText">
-          <h4 class="cpu">CPU: </h4>
-          <h4 class="ram">RAM: </h4>
-          <h4 class="ssd">SSD: </h4>
+          <h4 class="cpu">CPU</h4>
+          <h4 class="ram">RAM</h4>
+          <h4 class="ssd">SSD</h4>
         </div>
       </div>
 
@@ -89,9 +89,9 @@
           <div class="bar ssd" style="height:<?= $m_bar['ssd'] ?>%;"><?= $m_bar['ssd'] ?>%</div>
         </div>
         <div class="diagrammText">
-          <h4 class="cpu">CPU: </h4>
-          <h4 class="ram">RAM: </h4>
-          <h4 class="ssd">SSD: </h4>
+          <h4 class="cpu">CPU</h4>
+          <h4 class="ram">RAM</h4>
+          <h4 class="ssd">SSD</h4>
         </div>
       </div>
 
@@ -104,9 +104,9 @@
           <div class="bar ssd" style="height:<?= $b_bar['ssd'] ?>%;"><?= $b_bar['ssd'] ?>%</div>
         </div>
         <div class="diagrammText">
-          <h4 class="cpu">CPU: </h4>
-          <h4 class="ram">RAM: </h4>
-          <h4 class="ssd">SSD: </h4>
+          <h4 class="cpu">CPU</h4>
+          <h4 class="ram">RAM</h4>
+          <h4 class="ssd">SSD</h4>
         </div>
       </div>
     </div>
