@@ -85,7 +85,7 @@
         <h2 class="mediumText">Medium</h2>
         <div class="diagrammMedium">
           <div class="bar cpu" style="height:<?= $m_bar['cpu'] ?>%;"><?= $m_bar['cpu'] ?>%</div>
-          <div class="bar ram" style="height:<?= $m_bar['ram'] ?>%;"><?= $m_bar['cpu'] ?>%</div>
+          <div class="bar ram" style="height:<?= $m_bar['ram'] ?>%;"><?= $m_bar['ram'] ?>%</div>
           <div class="bar ssd" style="height:<?= $m_bar['ssd'] ?>%;"><?= $m_bar['ssd'] ?>%</div>
         </div>
         <div class="diagrammText">
@@ -165,7 +165,7 @@
           <button type="submit" class="delete">VM löschen</button>
 
           <p>
-            Hinweis: die vm wird gelöscht!
+            Hinweis: Die VM wird gelöscht!
           </p>
         </form>
       </div>
@@ -192,7 +192,7 @@
         foreach (Server::$server_data as $server) {
           $total += $server->revenue;
         }
-        echo $total;
+        echo "CHF " . $total;
         ?>
       </div>
 
@@ -204,8 +204,8 @@
     Erstellt von:
     Luka Ilikj
     Lukas Thommen
-    Dani el array_interse
-    Basel günterstrasse 5034
+    Dany El-Ali
+    IMS Basel
   </footer>
 
 
