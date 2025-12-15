@@ -118,10 +118,10 @@
         <h2>Virtuelle Maschine mieten</h2>
 
         <form method="post" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
-          <label for="vm_name">Name der VM</label>
+          <label for="vm_name">Name der Virtuellen Maschine</label>
           <input type="text" id="vm_name" name="vm_name" placeholder="z.B webserver-01 (max 30 zeichen)" required>
 
-          <label for="cpu">Anzahl Prozessoren (Cores)</label>
+          <label for="cpu">Anzahl Prozessoren (Kerne)</label>
           <select name="cpu" id="cpu" required>
             <option value="">Bitte wählen</option>
             <option value="1">1 Cores </option>
@@ -131,7 +131,7 @@
             <option value="16">16 Cores</option>
           </select>
 
-          <label for="ram">Anzahl Arbeitsspeicher</label>
+          <label for="ram">Anzahl Arbeitsspeicher in Gigabyte</label>
           <select name="ram" id="ram" required>
             <option value="">Bitte wählen</option>
             <option value="8">8 GB Arbeitsspeicher</option>
@@ -141,7 +141,7 @@
             <option value="128">128 GB Arbeitsspeicher</option>
           </select>
 
-          <label for="ssd">Anzahl Speicherplatz</label>
+          <label for="ssd">Anzahl Speicherplatz in Terabyte</label>
           <select name="ssd" id="ssd" required>
             <option value="">Bitte wählen</option>
             <option value="2">2 TB Speicher</option>
@@ -172,9 +172,21 @@
 
       <!-- Liste der VMs -->
       <div class="card">
-        <h2>Laufende virtuelle Maschinen</h2>
+
+        <?php
+        // Calculating server revenue used in Laufende VMs and Gesammtumsatz
+        $total = 0;
+        foreach (Server::$server_data as $server) {
+          $total += $server->revenue;
+        }
+        $revenue_is_zero = ($total === 0) ? true : false;
+        echo ($revenue_is_zero) ? "<h2>Keine Laufenden Virtuellen Maschinen</h2>" : "<h2>Laufende Virtuelle Maschine(n)</h2>";
+        ?>
         <ul>
           <?php
+          /* TODO:
+            - Implement a table that shows server name, specs, maybe revenue
+           */
           foreach (Server::$server_data as $server) {
             foreach ($server->vms as $vmname => $values) {
               echo "<li>$vmname</li>";
@@ -192,7 +204,7 @@
         foreach (Server::$server_data as $server) {
           $total += $server->revenue;
         }
-        echo "CHF " . $total;
+        echo (!$revenue_is_zero) ? "CHF " . $total : "---";
         ?>
       </div>
 

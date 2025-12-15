@@ -59,7 +59,7 @@ class Server
         $price += 45;
         break;
     }
-    return (int) round($price);
+    return $price;
   }
 
   function price_recalq(): int
