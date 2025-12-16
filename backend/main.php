@@ -23,10 +23,14 @@ class Server
     int $max_ssd,
     int $used_cpu,
     int $used_ram,
-    int $used_ssd,
+    int $used_ssd
   ) {
     $this->id = $id;
-    $this->vms = $vms;
+    $this->vms = [];
+    // Wenn es aus irgend einem grund ein objekt ist, zum array konvertieren
+    foreach ((array)$vms as $key => $value) {
+      $this->vms[$key] = is_object($value) ? (array)$value : (array)$value;
+    }
     $this->revenue = $revenue;
     $this->max_cpu = $max_cpu;
     $this->max_ram = $max_ram;
@@ -38,7 +42,6 @@ class Server
 
   function get_load(): int
   {
-    //return ($this->used_cpu + $this->used_ram + $this->used_ssd) / ($this->max_cpu + $this->max_ram + $this->max_ssd) * 100;
     return $this->used_cpu + $this->used_ram + $this->used_ssd;
   }
 
@@ -109,7 +112,7 @@ class Server
 
     asort($load);
 
-    foreach ($load as $server_id => $load) {
+    foreach ($load as $server_id => $load_value) {
       $server = Server::get_server_by_id($server_id);
       if (
         ($server->max_cpu - $server->used_cpu >= $cpu) &&
