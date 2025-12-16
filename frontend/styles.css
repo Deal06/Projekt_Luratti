@@ -280,3 +280,14 @@ footer {
 .table td:first-child, .table th:first-child {
     width: 30%;
 }
+
+#revenue_text {
+  text-align: center;
+  font-weight: 200px;
+  font-size: 30px;
+  margin-top: 40px;
+}
+
+#gesammtumsatz_header {
+  text-align: center;
+}

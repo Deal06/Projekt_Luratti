@@ -25,7 +25,7 @@
         !empty($_POST["ram"]) &&
         !empty($_POST["ssd"])
       ) {
-        $vm_name = htmlspecialchars($_POST["vm_name"]);
+        $vm_name = htmlspecialchars(trim($_POST["vm_name"]));
         $cpu = htmlspecialchars($_POST["cpu"]);
         $ram = htmlspecialchars($_POST["ram"]);
         $ssd = htmlspecialchars($_POST["ssd"]);
@@ -180,18 +180,20 @@
           $total += $server->revenue;
         }
         $revenue_is_zero = ($total === 0) ? true : false;
-        echo ($revenue_is_zero) ? "<h2>Keine Laufenden Virtuellen Maschinen</h2>" : "<h2>Laufende Virtuelle Maschine(n)</h2>";
+        echo ($revenue_is_zero) ? "<h2 id='gesammtumsatz_header'>Keine Laufenden Virtuellen Maschinen</h2>" : "<h2 id='gesammtumsatz_header'>Laufende Virtuelle Maschine(n)</h2>";
+        echo (!$revenue_is_zero) ? "" : "<p id='revenue_text'>---<p>";
         ?>
         <?php
         if (!$revenue_is_zero) {
           echo '<table class="table">';
           echo "<tr>";
-          echo "<th>Name</th>";
-          echo            "<th>CPU</th>";
-          echo         "<th>RAM</th>";
-          echo      "<th>SSD</th>";
-          echo   "<th>Gewinn</th>";
-          echo  "</tr>";
+          echo  "<th>Name</th>";
+          echo  "<th>CPU</th>";
+          echo  "<th>RAM</th>";
+          echo  "<th>SSD</th>";
+          echo  "<th>Gewinn</th>";
+          echo "</tr>";
+
           function get($vm, $prop): int
           {
             return is_array($vm) ? $vm[$prop] : $vm->$prop;
@@ -218,13 +220,13 @@
 
       <!-- Preis -->
       <div class="card">
-        <h2>Gesammtumsatz pro Monat:</h2>
+        <h2 id="gesammtumsatz_header">Gesammtumsatz pro Monat</h2>
         <?php
         $total = 0;
         foreach (Server::$server_data as $server) {
           $total += $server->revenue;
         }
-        echo (!$revenue_is_zero) ? "CHF " . $total : "---";
+        echo (!$revenue_is_zero) ? "<p id='revenue_text'>CHF $total</p>" : "<p id='revenue_text'>---</p>";
         ?>
       </div>
 
