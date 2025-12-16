@@ -121,7 +121,7 @@
           <label for="vm_name">Name der Virtuellen Maschine</label>
           <input type="text" id="vm_name" name="vm_name" placeholder="z.B webserver-01 (max 30 zeichen)" required>
 
-          <label for="cpu">Anzahl Prozessoren (Kerne)</label>
+          <label for="cpu">Bedarf an Prozessoren (Kerne)</label>
           <select name="cpu" id="cpu" required>
             <option value="">Bitte wählen</option>
             <option value="1">1 Cores </option>
@@ -131,7 +131,7 @@
             <option value="16">16 Cores</option>
           </select>
 
-          <label for="ram">Anzahl Arbeitsspeicher in Gigabyte</label>
+          <label for="ram">Bedarf an Arbeitsspeicher in Gigabyte</label>
           <select name="ram" id="ram" required>
             <option value="">Bitte wählen</option>
             <option value="8">8 GB Arbeitsspeicher</option>
@@ -141,7 +141,7 @@
             <option value="128">128 GB Arbeitsspeicher</option>
           </select>
 
-          <label for="ssd">Anzahl Speicherplatz in Terabyte</label>
+          <label for="ssd">Bedarf an Speicherplatz in Terabyte</label>
           <select name="ssd" id="ssd" required>
             <option value="">Bitte wählen</option>
             <option value="2">2 TB Speicher</option>
@@ -182,18 +182,38 @@
         $revenue_is_zero = ($total === 0) ? true : false;
         echo ($revenue_is_zero) ? "<h2>Keine Laufenden Virtuellen Maschinen</h2>" : "<h2>Laufende Virtuelle Maschine(n)</h2>";
         ?>
-        <ul>
-          <?php
-          /* TODO:
-            - Implement a table that shows server name, specs, maybe revenue
-           */
+        <?php
+        if (!$revenue_is_zero) {
+          echo '<table class="table">';
+          echo "<tr>";
+          echo "<th>Name</th>";
+          echo            "<th>CPU</th>";
+          echo         "<th>RAM</th>";
+          echo      "<th>SSD</th>";
+          echo   "<th>Gewinn</th>";
+          echo  "</tr>";
+          function get($vm, $prop): int
+          {
+            return is_array($vm) ? $vm[$prop] : $vm->$prop;
+          }
+
           foreach (Server::$server_data as $server) {
             foreach ($server->vms as $vmname => $values) {
-              echo "<li>$vmname</li>";
+              $vm_used_cpu  = get($values, 'vm_used_cpu');
+              $vm_used_ram  = get($values, 'vm_used_ram');
+              $vm_used_ssd  = get($values, 'vm_used_ssd');
+              $cost = get($values, 'cost');
+              echo "<tr>";
+              echo "<td>$vmname</td>";
+              echo "<td>$vm_used_cpu GB</td>";
+              echo "<td>$vm_used_ram GB</td>";
+              echo "<td>$vm_used_ssd GB</td>";
+              echo "<td>CHF $cost</td>";
+              echo "</tr>";
             }
           }
-          ?>
-        </ul>
+        }          ?>
+        </table>
       </div>
 
       <!-- Preis -->
